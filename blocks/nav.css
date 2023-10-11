@@ -1,0 +1,18 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav__logo {
+  margin: 0;
+  width: 172px;
+  height: 33px;
+  padding: 0 0 41px 0;
+}
+
+.nav__border {
+  width: 100%;
+  opacity: 0.7;
+  background-color: #545454;
+}

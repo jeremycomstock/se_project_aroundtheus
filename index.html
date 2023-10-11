@@ -16,14 +16,79 @@
   <body>
     <div class="page">
       <header class="header">
-        <nav class="nav"></nav>
+        <nav class="nav">
+          <img class="nav__logo" src="images/logo-light.svg" />
+          <hr class="nav__border"/>
+        </nav>
       </header>
       <main class="content">
-        <section class="profile"></section>
-        <section class="gallery"></section>
+        <section class="profile">
+          <svg class="profile__avatar" width="168.75" height="127.5">
+            <mask id="profile__vignette">
+              <circle cx="50%" cy="50%" r="60" fill="white" />
+            </mask>
+            <image
+              width="168.75"
+              height="127.5"
+              href="./images/jacques-cousteau.jpg"
+              mask="url(#profile__vignette)"
+            />
+          </svg>
+          <div class="profile__info">
+            <p class="profile__name">Jacques Cousteau</p>
+            <input class="profile__button" type="button">
+            </input>
+            <p class="profile__description">Explorer</p>
+          </div>
+          <input class="profile__add" type="button">
+        </section>
+        <section class="gallery">
+          <div class="card">
+            <img class="card__image" src="images/yosemite.jpg">
+            <div class="card__info">           
+               <p class="card__name">Yosemite Valley</p>
+              <input class="card__like-button" type="button"/>
+            </div>
+          </div>
+          <div class="card">
+            <img class="card__image" src="images/lake-louise.jpg">
+            <div class="card__info">           
+               <p class="card__name">Lake Louise</p>
+              <input class="card__like-button" type="button"/>
+            </div>
+          </div>
+          <div class="card">
+            <img class="card__image" src="images/bald-mountains.jpg">
+            <div class="card__info">           
+               <p class="card__name">Bald Mountains</p>
+              <input class="card__like-button" type="button"/>
+            </div>
+          </div>
+          <div class="card">
+            <img class="card__image" src="images/latemar.jpg">
+            <div class="card__info">           
+               <p class="card__name">Latemar</p>
+              <input class="card__like-button" type="button"/>
+            </div>
+          </div>
+          <div class="card">
+            <img class="card__image" src="images/vanoise.jpg">
+            <div class="card__info">           
+               <p class="card__name">Vanoise Nationa...</p>
+              <input class="card__like-button" type="button"/>
+            </div>
+          </div>
+          <div class="card">
+            <img class="card__image" src="images/lago.jpg">
+            <div class="card__info">           
+               <p class="card__name">Lago di Braies</p>
+              <input class="card__like-button" type="button"/>
+            </div>
+          </div>
+        </section>
       </main>
       <footer class="footer">
-        <div class="footer__content"></div>
+          <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
   </body>
