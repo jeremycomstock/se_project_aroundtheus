@@ -1,7 +1,5 @@
 .nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  width: 100%;
 }
 
 .nav__logo {
@@ -13,6 +11,21 @@
 
 .nav__border {
   width: 100%;
+  margin: 0;
+  padding: 0;
   opacity: 0.7;
   background-color: #545454;
+}
+
+@media screen and (max-width: 320px) {
+  .nav {
+    max-width: 100%;
+  }
+
+  .nav__logo {
+    margin: 28px 0 32px 27px;
+    padding: 0;
+    width: 126px;
+    height: 24px;
+  }
 }

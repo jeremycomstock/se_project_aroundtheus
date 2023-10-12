@@ -1,6 +1,22 @@
 .page {
-  margin: 0;
-  padding: 45px 200px 60px 200px;
-  box-sizing: border-box;
+  padding: 45px 200px 60px;
   background-color: black;
+}
+
+@media screen and (max-width: 1000px) {
+  .page {
+    padding: 45px 125px 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .page {
+    padding: 45px 25px 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page {
+    padding: 45px 0 0;
+  }
 }

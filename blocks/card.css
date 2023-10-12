@@ -1,5 +1,13 @@
+@keyframes button-transparency {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
 .card {
-  margin: 47.25px 0 0;
   width: 282px;
   height: 361px;
   background-color: white;
@@ -35,4 +43,9 @@
   background-color: rgb(0, 0, 0, 0);
   background-image: url("../images/like-button.svg");
   border: none;
+}
+
+.card__like-button:hover {
+  animation: button-transparency 0.5s ease-in-out forwards;
+  cursor: pointer;
 }
