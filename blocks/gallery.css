@@ -1,6 +1,6 @@
 .gallery {
   max-width: 880px;
-  margin: 47.25px 0 0;
+  margin: 47.25px auto 0;
   background-color: black;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
@@ -10,6 +10,6 @@
 
 @media screen and (max-width: 320px) {
   .gallery {
-    margin: 42.75px 19px 0;
+    margin: 42.75px 15px 0;
   }
 }

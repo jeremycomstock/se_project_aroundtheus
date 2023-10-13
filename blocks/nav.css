@@ -23,9 +23,13 @@
   }
 
   .nav__logo {
-    margin: 28px 0 32px 27px;
+    margin: 0 0 32px 27px;
     padding: 0;
     width: 126px;
     height: 24px;
+  }
+
+  .nav__border {
+    width: 99%;
   }
 }
