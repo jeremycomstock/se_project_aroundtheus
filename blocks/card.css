@@ -1,35 +1,26 @@
-@keyframes button-transparency {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.5;
-  }
-}
-
 .card {
-  width: 282px;
-  height: 361px;
   background-color: white;
   border-radius: 10px;
+  list-style: none;
+  overflow: hidden;
 }
 
 .card__image {
-  border-radius: 10px 10px 0 0;
   margin: 0;
   width: 282px;
   height: 282px;
 }
 
 .card__info {
-  max-width: 240px;
-  margin: 20px 20px;
+  max-width: 280px;
+  margin: 25px 20px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 .card__name {
+  max-width: 220px;
   margin: 0;
   font-family: "Inter", "Arial", sans-serif;
   font-size: 24px;
@@ -41,7 +32,6 @@
 }
 
 .card__like-button {
-  padding-right: 15px;
   margin: 0;
   width: 21px;
   height: 18px;
@@ -51,6 +41,7 @@
 }
 
 .card__like-button:hover {
-  animation: button-transparency 0.5s ease-in-out forwards;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in-out;
   cursor: pointer;
 }

@@ -2,13 +2,6 @@
   width: 100%;
 }
 
-.nav__logo {
-  margin: 0;
-  width: 172px;
-  height: 33px;
-  padding: 0 0 41px 0;
-}
-
 .nav__border {
   width: 100%;
   margin: 0;
@@ -28,8 +21,3 @@
     width: 126px;
     height: 24px;
   }
-
-  .nav__border {
-    width: 99%;
-  }
-}
