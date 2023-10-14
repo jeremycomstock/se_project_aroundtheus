@@ -38,6 +38,7 @@
 }
 
 .profile__edit-button {
+  padding: 0;
   background: none;
   grid-area: button;
   width: 24px;
@@ -50,7 +51,6 @@
 
 .profile__edit-button:hover {
   opacity: 0.6;
-  transition: opacity 0.2s ease-in-out;
   cursor: pointer;
 }
 
@@ -79,7 +79,7 @@
   background: transparent url(../images/add-button.svg) center no-repeat;
   background-size: 24px 24px;
   border: 2px solid white;
-  border-radius: px;
+  border-radius: 2px;
   width: 150px;
   height: 50px;
   margin: 0;
@@ -91,7 +91,6 @@
 
 .profile__add-button:hover {
   opacity: 0.6;
-  transition: opacity 0.2s ease-in-out;
   cursor: pointer;
 }
 
