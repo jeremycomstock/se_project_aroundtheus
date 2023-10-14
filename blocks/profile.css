@@ -10,16 +10,7 @@
   margin-right: 30px;
   height: 120px;
   width: 120px;
-  overflow: hidden;
   border-radius: 50%;
-  object-fit: cover;
-}
-
-.profile__avatar-image {
-  margin-right: 30px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .profile__info {
@@ -47,11 +38,20 @@
 }
 
 .profile__edit-button {
+  background: none;
   grid-area: button;
   width: 24px;
   height: 24px;
   border: 1px solid white;
   display: flex;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .profile__edit-button-image {
@@ -59,12 +59,6 @@
   width: 10px;
   height: 10px;
   object-position: center center;
-}
-
-.profile__edit-button:hover {
-  opacity: 0.6;
-  transition: opacity 0.2s ease-in-out;
-  cursor: pointer;
 }
 
 .profile__description {
@@ -75,18 +69,24 @@
   line-height: normal;
   color: white;
   grid-area: description;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 400px;
 }
 
 .profile__add-button {
   background: transparent url(../images/add-button.svg) center no-repeat;
   background-size: 24px 24px;
   border: 2px solid white;
-  border-radius: 3px;
+  border-radius: px;
   width: 150px;
   height: 50px;
   margin: 0;
   margin-left: auto;
   align-self: center;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .profile__add-button:hover {
@@ -121,7 +121,7 @@
   }
 
   .profile__add-button {
-    margin: 0;
+    margin: 36px 0 0;
     width: 100%;
   }
 }
@@ -164,11 +164,11 @@
     width: 100%;
     text-align: center;
     font-size: 14px;
+    max-width: 282px;
   }
 
   .profile__add-button {
     max-width: 100%;
     background-size: 16px 16px;
-    margin: 36px 0;
   }
 }

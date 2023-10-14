@@ -38,6 +38,8 @@
   background-color: rgb(0, 0, 0, 0);
   background-image: url("../images/like-button.svg");
   border: none;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .card__like-button:hover {
