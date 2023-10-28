@@ -25,6 +25,8 @@ const initialCards = [
   },
 ];
 
+// Elements
+
 const editButton = document.querySelector(".profile__edit-button");
 const modalBox = document.querySelector(".modal");
 const closeButton = document.querySelector(".modal__close");
@@ -34,24 +36,47 @@ let modalInputDescription = modalBox.querySelector("#description");
 const profile = document.querySelector(".profile");
 let profileName = profile.querySelector(".profile__name");
 let profileDescription = profile.querySelector(".profile__description");
+let cardList = document.querySelector(".gallery__cards");
+let cardTemplate = cardList.querySelector("#gallery-template").content;
 
-function openEditor() {
+// Functions
+
+function getCardElement(i) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImage = cardElement.querySelector(".card__image");
+  const cardName = cardElement.querySelector(".card__name");
+  cardImage.setAttribute("src", initialCards[i].link);
+  cardImage.setAttribute("alt", initialCards[i].name);
+  cardName.textContent = initialCards[i].name;
+  cardList.append(cardElement);
+  return getCardElement;
+}
+
+function handleOpenEditor() {
   modalBox.setAttribute("style", "display: flex");
   modalInputName.value = profileName.textContent;
   modalInputDescription.value = profileDescription.textContent;
 }
 
-function saveProfile(e) {
+function handleSaveProfile(e) {
   profileName.textContent = modalInputName.value;
   profileDescription.textContent = modalInputDescription.value;
   e.preventDefault();
 }
 
-function closePopup() {
+function handleClosePopup() {
   modalBox.setAttribute("style", "display: none");
 }
 
-editButton.addEventListener("click", openEditor);
-closeButton.addEventListener("click", closePopup);
-saveButton.addEventListener("click", saveProfile);
-saveButton.addEventListener("click", closePopup);
+// Event Handlers
+
+editButton.addEventListener("click", handleOpenEditor);
+closeButton.addEventListener("click", handleClosePopup);
+saveButton.addEventListener("click", handleSaveProfile);
+saveButton.addEventListener("click", handleClosePopup);
+
+// Loops
+
+for (i = 0; i < initialCards.length; i++) {
+  getCardElement(i);
+}
