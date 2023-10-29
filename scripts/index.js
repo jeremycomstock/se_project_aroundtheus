@@ -41,18 +41,18 @@ const cardTemplate = cardList.querySelector("#gallery-template").content;
 
 // Functions
 
-function createCard(i) {
+function createCard(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardName = cardElement.querySelector(".card__name");
-  cardImage.setAttribute("src", initialCards[i].link);
-  cardImage.setAttribute("alt", initialCards[i].name);
-  cardName.textContent = initialCards[i].name;
+  cardImage.setAttribute("src", cardData.link);
+  cardImage.setAttribute("alt", cardData.name);
+  cardName.textContent = cardData.name;
   return cardElement;
 }
 
-function getCardElement(i) {
-  const cardElement = createCard(i);
+function getCardElement(cardData) {
+  const cardElement = createCard(cardData);
   cardList.append(cardElement);
 }
 
@@ -81,10 +81,10 @@ function handleSaveProfile(e) {
 editButton.addEventListener("click", openPopup);
 editButton.addEventListener("click", handleOpenEditor);
 closeButton.addEventListener("click", closePopup);
-saveButton.addEventListener("click", handleSaveProfile);
+saveButton.addEventListener("submit", handleSaveProfile);
 
 // Loops
 
 for (i = 0; i < initialCards.length; i++) {
-  getCardElement(i);
+  getCardElement(initialCards[i]);
 }
