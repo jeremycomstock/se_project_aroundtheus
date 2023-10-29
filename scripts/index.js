@@ -28,32 +28,43 @@ const initialCards = [
 // Elements
 
 const editButton = document.querySelector(".profile__edit-button");
-const modalBox = document.querySelector(".modal");
+const popup = document.querySelector(".modal");
 const closeButton = document.querySelector(".modal__close");
-const saveButton = modalBox.querySelector(".modal__button");
-let modalInputName = modalBox.querySelector("#title");
-let modalInputDescription = modalBox.querySelector("#description");
+const saveButton = popup.querySelector(".modal__button");
+const modalInputName = popup.querySelector("#title");
+const modalInputDescription = popup.querySelector("#description");
 const profile = document.querySelector(".profile");
-let profileName = profile.querySelector(".profile__name");
-let profileDescription = profile.querySelector(".profile__description");
-let cardList = document.querySelector(".gallery__cards");
-let cardTemplate = cardList.querySelector("#gallery-template").content;
+const profileName = profile.querySelector(".profile__name");
+const profileDescription = profile.querySelector(".profile__description");
+const cardList = document.querySelector(".gallery__cards");
+const cardTemplate = cardList.querySelector("#gallery-template").content;
 
 // Functions
 
-function getCardElement(i) {
+function createCard(i) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardName = cardElement.querySelector(".card__name");
   cardImage.setAttribute("src", initialCards[i].link);
   cardImage.setAttribute("alt", initialCards[i].name);
   cardName.textContent = initialCards[i].name;
+  return cardElement;
+}
+
+function getCardElement(i) {
+  const cardElement = createCard(i);
   cardList.append(cardElement);
-  return getCardElement;
+}
+
+function openPopup() {
+  popup.classList.add("modal_opened");
+}
+
+function closePopup() {
+  popup.classList.remove("modal_opened");
 }
 
 function handleOpenEditor() {
-  modalBox.setAttribute("style", "display: flex");
   modalInputName.value = profileName.textContent;
   modalInputDescription.value = profileDescription.textContent;
 }
@@ -61,19 +72,15 @@ function handleOpenEditor() {
 function handleSaveProfile(e) {
   profileName.textContent = modalInputName.value;
   profileDescription.textContent = modalInputDescription.value;
-  e.preventDefault();
-}
-
-function handleClosePopup() {
-  modalBox.setAttribute("style", "display: none");
+  popup.classList.remove("modal_opened");
 }
 
 // Event Handlers
 
+editButton.addEventListener("click", openPopup);
 editButton.addEventListener("click", handleOpenEditor);
-closeButton.addEventListener("click", handleClosePopup);
+closeButton.addEventListener("click", closePopup);
 saveButton.addEventListener("click", handleSaveProfile);
-saveButton.addEventListener("click", handleClosePopup);
 
 // Loops
 
