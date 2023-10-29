@@ -70,6 +70,7 @@ function handleOpenEditor() {
 }
 
 function handleSaveProfile(e) {
+  e.preventDefault();
   profileName.textContent = modalInputName.value;
   profileDescription.textContent = modalInputDescription.value;
   popup.classList.remove("modal_opened");
