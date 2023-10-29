@@ -66,6 +66,7 @@ function closePopup() {
 }
 
 function handleOpenEditor() {
+  openPopup();
   modalInputName.value = profileName.textContent;
   modalInputDescription.value = profileDescription.textContent;
 }
@@ -74,12 +75,11 @@ function handleSaveProfile(e) {
   e.preventDefault();
   profileName.textContent = modalInputName.value;
   profileDescription.textContent = modalInputDescription.value;
-  popup.classList.remove("modal_opened");
+  closePopup();
 }
 
 // Event Handlers
 
-editButton.addEventListener("click", openPopup);
 editButton.addEventListener("click", handleOpenEditor);
 closeButton.addEventListener("click", closePopup);
 modalForm.addEventListener("submit", handleSaveProfile);
