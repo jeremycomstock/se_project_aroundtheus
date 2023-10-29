@@ -29,6 +29,7 @@ const initialCards = [
 
 const editButton = document.querySelector(".profile__edit-button");
 const popup = document.querySelector(".modal");
+const modalForm = popup.querySelector(".modal__form");
 const closeButton = document.querySelector(".modal__close");
 const saveButton = popup.querySelector(".modal__button");
 const modalInputName = popup.querySelector("#title");
@@ -81,7 +82,7 @@ function handleSaveProfile(e) {
 editButton.addEventListener("click", openPopup);
 editButton.addEventListener("click", handleOpenEditor);
 closeButton.addEventListener("click", closePopup);
-saveButton.addEventListener("submit", handleSaveProfile);
+modalForm.addEventListener("submit", handleSaveProfile);
 
 // Loops
 
