@@ -1,4 +1,4 @@
-# Project 3: Around The U.S.
+# Project 5: Around The U.S.
 
 ### Overview
 
@@ -8,17 +8,15 @@
 
 **Intro**
 
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
+This is a website to track the names and photos of various beautiful locations. You can click the 'Edit' button to change your name and profession,the 'Add' button to add new cards, and the 'Delete' button to remove them.
+
+**Technologies**
+This project is primarily compiled in HTML/CSS, with JavaScript to add functionality. 
 
 **Figma**
 
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+- [Link to the project on Figma] (https://www.figma.com/file/JFPhASqvZ5pBjQV2ouUlim/Sprint-5_-Around-The-U.S.-_-desktop-%2B-mobile-&#40;Copy&#41;?t=3hvVWRz9LUFsxyNn-6)
 
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
-
-Good luck and have fun!
 
 **GitHub Pages**
 
