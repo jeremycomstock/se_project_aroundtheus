@@ -43,7 +43,8 @@
   grid-area: button;
   width: 24px;
   height: 24px;
-  border: 1px solid white;
+  border: none;
+  background-image: url(../images/edit-button.svg);
   display: flex;
   opacity: 1;
   transition: opacity 0.2s ease-in-out;
@@ -152,6 +153,7 @@
     margin: 0;
     width: 18px;
     height: 18px;
+    background-image: url(../images/edit-button-small.svg);
   }
 
   .profile__edit-button-image {
