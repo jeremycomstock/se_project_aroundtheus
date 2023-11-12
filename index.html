@@ -27,10 +27,16 @@
           />
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button class="profile__edit-button" type="button"></button>
+            <button
+              class="profile__button profile__edit-button"
+              type="button"
+            ></button>
             <p class="profile__description">Explorer</p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button
+            class="profile__button profile__add-button"
+            type="button"
+          ></button>
         </section>
         <section class="gallery">
           <ul class="gallery__cards">
@@ -56,7 +62,7 @@
       <div class="modal__container">
         <button class="modal__close modal__close_type_edit"></button>
         <h2 class="modal__heading">Edit profile</h2>
-        <form class="modal__form modal__form_edit">
+        <form class="modal__form" name="profile-form">
           <fieldset class="modal__fieldset">
             <input
               type="text"
@@ -85,7 +91,7 @@
       <div class="modal__container">
         <button class="modal__close modal__close_type_add"></button>
         <h2 class="modal__heading">New place</h2>
-        <form class="modal__form modal__form_add">
+        <form class="modal__form" name="card-form">
           <fieldset class="modal__fieldset">
             <input
               type="text"

@@ -31,12 +31,10 @@ const initialCards = [
 
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
+const closeButtons = document.querySelectorAll(".modal__close");
 // Edit Modal Elements
-const popup = document.querySelector(".modal");
 const editPopup = document.querySelector(".modal_type_edit");
-const modalFormEdit = document.querySelector(".modal__form_edit");
-const saveButton = editButton.querySelector(".modal__button");
-const editCloseButton = document.querySelector(".modal__close_type_edit");
+const profileForm = document.forms["profile-form"];
 const modalInputName = editPopup.querySelector("#name");
 const modalInputDescription = editPopup.querySelector("#description");
 const profile = document.querySelector(".profile");
@@ -46,14 +44,10 @@ const profileDescription = profile.querySelector(".profile__description");
 const cardPopup = document.querySelector(".modal_type_add");
 const modalInputTitle = cardPopup.querySelector("#title");
 const modalInputLink = cardPopup.querySelector("#link");
-const cardCloseButton = cardPopup.querySelector(".modal__close_type_add");
-const modalFormAdd = document.querySelector(".modal__form_add");
+const cardForm = document.forms["card-form"];
 const previewImageModal = document.querySelector(".modal_image");
 const previewImage = document.querySelector(".modal__preview-image");
 const previewName = document.querySelector(".modal__preview-name");
-const previewCloseButton = previewImageModal.querySelector(
-  ".modal__close_type_preview"
-);
 // Card List Elements
 const cardList = document.querySelector(".gallery__cards");
 const cardTemplate = cardList
@@ -90,7 +84,7 @@ function createCard(cardData) {
 
   // Delete Function
 
-  function handleDeleteCard(cardData) {
+  function handleDeleteCard() {
     cardElement.remove();
   }
 
@@ -101,29 +95,28 @@ function createCard(cardData) {
 
 // Popup Functions
 
-function openEditPopup() {
-  editPopup.classList.add("modal_opened");
+function openPopup(popup) {
+  popup.classList.add("modal_opened");
+}
+
+editButton.addEventListener("click", () => {
   modalInputName.value = profileName.textContent;
   modalInputDescription.value = profileDescription.textContent;
+  openPopup(editPopup);
+});
+
+addButton.addEventListener("click", () => {
+  openPopup(cardPopup);
+});
+
+function closePopup(popup) {
+  popup.classList.remove("modal_opened");
 }
 
-function openCardPopup() {
-  cardPopup.classList.add("modal_opened");
-}
-
-function closeEditPopup() {
-  editPopup.classList.remove("modal_opened");
-}
-
-function closeCardPopup() {
-  cardPopup.classList.remove("modal_opened");
-}
-
-function closePreviewPopup() {
-  previewImageModal.classList.remove("modal_opened");
-}
-
-// Page Functions
+closeButtons.forEach((button) => {
+  const popup = button.closest(".modal");
+  button.addEventListener("click", () => closePopup(popup));
+});
 
 function handleSaveProfile(e) {
   e.preventDefault();
@@ -132,31 +125,20 @@ function handleSaveProfile(e) {
   closeEditPopup();
 }
 
-function handleAddCard(e, cardData) {
+function handleAddCard(e) {
   e.preventDefault();
   const name = modalInputTitle.value;
   const link = modalInputLink.value;
   renderCard({ name, link }, cardList);
-  closeCardPopup();
-}
-
-function handleLikeButton() {
-  cardLikeButton.classList.add("card__like-button-active");
-}
-
-function handleUnlike() {
-  cardLikeButton.classList.remove("card__like-button-active");
+  modalInputTitle.value = "";
+  modalInputLink.value = "";
+  closePopup(cardPopup);
 }
 
 // Event Handlers
 
-editButton.addEventListener("click", openEditPopup);
-addButton.addEventListener("click", openCardPopup);
-cardCloseButton.addEventListener("click", closeCardPopup);
-editCloseButton.addEventListener("click", closeEditPopup);
-previewCloseButton.addEventListener("click", closePreviewPopup);
-modalFormEdit.addEventListener("submit", handleSaveProfile);
-modalFormAdd.addEventListener("submit", handleAddCard);
+profileForm.addEventListener("submit", handleSaveProfile);
+cardForm.addEventListener("submit", handleAddCard);
 
 // Loops
 
