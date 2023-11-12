@@ -122,7 +122,7 @@ function handleSaveProfile(e) {
   e.preventDefault();
   profileName.textContent = modalInputName.value;
   profileDescription.textContent = modalInputDescription.value;
-  closeEditPopup();
+  closePopup(editPopup);
 }
 
 function handleAddCard(e) {
