@@ -72,7 +72,7 @@ function createCard(cardData) {
   const deleteButton = cardElement.querySelector(".card__delete-button");
 
   cardImage.addEventListener("click", () => {
-    previewImageModal.classList.toggle("modal_opened");
+    openPopup(previewImageModal);
     previewImage.setAttribute("src", cardData.link);
     previewImage.setAttribute("alt", cardData.name);
     previewName.textContent = cardData.name;
@@ -130,8 +130,7 @@ function handleAddCard(e) {
   const name = modalInputTitle.value;
   const link = modalInputLink.value;
   renderCard({ name, link }, cardList);
-  modalInputTitle.value = "";
-  modalInputLink.value = "";
+  cardForm.reset();
   closePopup(cardPopup);
 }
 
