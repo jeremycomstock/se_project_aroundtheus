@@ -7,7 +7,7 @@
   right: 0;
   background: rgba(0, 0, 0, 0.5);
   /* High z-index so that the pop-up always appears over everything. */
-  z-index: 999;
+  z-index: 998;
   /* Pop-up turned off by default, use JS to change display to flex when the edit button is clicked. */
   display: flex;
   visibility: hidden;
@@ -33,6 +33,7 @@
 }
 
 .modal__container {
+  z-index: 999;
   position: relative;
   padding: 34px 36px 36px;
   box-sizing: border-box;
@@ -88,13 +89,20 @@
 }
 
 .modal__fieldset {
+  position: relative;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
   gap: 30px;
+  flex-direction: column;
   border: none;
   background: none;
+}
+
+.modal__label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal__input {
@@ -107,6 +115,16 @@
   font-weight: 400;
 }
 
+.modal__input:valid {
+}
+
+.modal__input:invalid {
+}
+
+.modal__input_type_error {
+  border-bottom: 1px solid red;
+}
+
 .modal__input_type_name {
 }
 
@@ -117,6 +135,19 @@
 }
 
 .modal__input_type_link {
+}
+
+.modal__error_visible {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 5px);
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  color: red;
+  overflow: hidden;
+  transition: opacity 0.3s;
 }
 
 .modal__button {
@@ -138,6 +169,18 @@
 .modal__button:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+.modal__button_disabled {
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  opacity: 0.2;
+}
+
+.modal__button_disabled:hover {
+  opacity: 0.2;
+  cursor: pointer;
 }
 
 .modal_image {

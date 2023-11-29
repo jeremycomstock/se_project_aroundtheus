@@ -33,6 +33,8 @@ const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 const closeButtons = document.querySelectorAll(".modal__close");
 // Edit Modal Elements
+const modalOverlays = document.querySelectorAll(".modal");
+const formElement = document.querySelectorAll(".modal__form");
 const editPopup = document.querySelector(".modal_type_edit");
 const profileForm = document.forms["profile-form"];
 const modalInputName = editPopup.querySelector("#name");
@@ -118,6 +120,20 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
+modalOverlays.forEach((overlay) => {
+  const popup = overlay.closest(".modal");
+  overlay.addEventListener("click", (e) => {
+    if (e.target == popup) {
+      closePopup(popup);
+    }
+  });
+  overlay.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closePopup(popup);
+    }
+  });
+});
+
 function handleSaveProfile(e) {
   e.preventDefault();
   profileName.textContent = modalInputName.value;
@@ -140,5 +156,4 @@ profileForm.addEventListener("submit", handleSaveProfile);
 cardForm.addEventListener("submit", handleAddCard);
 
 // Loops
-
 initialCards.forEach((cardData) => renderCard(cardData, cardList));
