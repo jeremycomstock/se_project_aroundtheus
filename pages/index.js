@@ -1,4 +1,9 @@
-// Default Card Array
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                               Default Card Array                               ||
+// ! ||--------------------------------------------------------------------------------||
 
 const initialCards = [
   {
@@ -27,6 +32,10 @@ const initialCards = [
   },
 ];
 
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                               Declared Variables                               ||
+// ! ||--------------------------------------------------------------------------------||
+
 // Profile Elements
 
 const editButton = document.querySelector(".profile__edit-button");
@@ -50,54 +59,42 @@ const previewImageModal = document.querySelector(".modal_image");
 const previewImage = document.querySelector(".modal__preview-image");
 const previewName = document.querySelector(".modal__preview-name");
 // Card List Elements
+
 const cardList = document.querySelector(".gallery__cards");
+
 const cardTemplate = cardList
   .querySelector("#gallery-template")
   .content.querySelector(".card");
 
-// Card Functions
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                                 Card Functions                                 ||
+// ! ||--------------------------------------------------------------------------------||
+
+function handleImageClick() {
+  this._cardImage.addEventListener("click", () => {
+    openPopup(previewImageModal);
+    previewImage.setAttribute("src", this._link);
+    previewImage.setAttribute("alt", this._name);
+    previewName.textContent = this._name;
+  });
+}
 
 function renderCard(cardData, cardList) {
-  const cardElement = createCard(cardData);
-  cardList.prepend(cardElement);
+  const card = new Card(cardData, cardTemplate, handleImageClick);
+  cardList.prepend(card.getView());
 }
 
-function createCard(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardName = cardElement.querySelector(".card__name");
-  cardImage.setAttribute("src", cardData.link);
-  cardImage.setAttribute("alt", cardData.name);
-  cardName.textContent = cardData.name;
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-
-  cardImage.addEventListener("click", () => {
-    openPopup(previewImageModal);
-    previewImage.setAttribute("src", cardData.link);
-    previewImage.setAttribute("alt", cardData.name);
-    previewName.textContent = cardData.name;
-  });
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  // Delete Function
-
-  function handleDeleteCard() {
-    cardElement.remove();
-  }
-
-  deleteButton.addEventListener("click", handleDeleteCard);
-
-  return cardElement;
-}
-
-// Popup Functions
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                                 Popup Functions                                ||
+// ! ||--------------------------------------------------------------------------------||
 
 function openPopup(popup) {
   popup.classList.add("modal_opened");
+  if (popup == editPopup) {
+    editFormValidator.enableValidation();
+  } else if (popup == cardPopup) {
+    addFormValidator.enableValidation();
+  }
   document.addEventListener("keydown", closeModalByEscape);
   popup.addEventListener("click", closeModalByOverlayClick);
 }
@@ -153,10 +150,31 @@ function handleAddCard(e) {
   closePopup(cardPopup);
 }
 
-// Event Handlers
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                                 Event Handlers                                 ||
+// ! ||--------------------------------------------------------------------------------||
 
 profileForm.addEventListener("submit", handleSaveProfile);
 cardForm.addEventListener("submit", handleAddCard);
 
-// Loops
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                                     Loops                                     ||
+// ! ||--------------------------------------------------------------------------------||
+
 initialCards.forEach((cardData) => renderCard(cardData, cardList));
+
+// ! ||--------------------------------------------------------------------------------||
+// ! ||                                 Form Validation                                ||
+// ! ||--------------------------------------------------------------------------------||
+
+const validationSettings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormValidator = new FormValidator(validationSettings, profileForm);
+const addFormValidator = new FormValidator(validationSettings, cardForm);
