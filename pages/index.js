@@ -71,12 +71,10 @@ const cardTemplate = cardList
 // ! ||--------------------------------------------------------------------------------||
 
 function handleImageClick() {
-  this._cardImage.addEventListener("click", () => {
-    openPopup(previewImageModal);
-    previewImage.setAttribute("src", this._link);
-    previewImage.setAttribute("alt", this._name);
-    previewName.textContent = this._name;
-  });
+  openPopup(previewImageModal);
+  previewImage.setAttribute("src", this._link);
+  previewImage.setAttribute("alt", this._name);
+  previewName.textContent = this._name;
 }
 
 function renderCard(cardData, cardList) {
@@ -90,11 +88,6 @@ function renderCard(cardData, cardList) {
 
 function openPopup(popup) {
   popup.classList.add("modal_opened");
-  if (popup == editPopup) {
-    editFormValidator.enableValidation();
-  } else if (popup == cardPopup) {
-    addFormValidator.enableValidation();
-  }
   document.addEventListener("keydown", closeModalByEscape);
   popup.addEventListener("click", closeModalByOverlayClick);
 }
@@ -178,3 +171,6 @@ const validationSettings = {
 
 const editFormValidator = new FormValidator(validationSettings, profileForm);
 const addFormValidator = new FormValidator(validationSettings, cardForm);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
