@@ -70,11 +70,11 @@ const cardTemplate = cardList
 // ! ||                                 Card Functions                                 ||
 // ! ||--------------------------------------------------------------------------------||
 
-function handleImageClick() {
+function handleImageClick(card) {
   openPopup(previewImageModal);
-  previewImage.setAttribute("src", this._link);
-  previewImage.setAttribute("alt", this._name);
-  previewName.textContent = this._name;
+  previewImage.setAttribute("src", card.link);
+  previewImage.setAttribute("alt", card.name);
+  previewName.textContent = card.name;
 }
 
 function renderCard(cardData, cardList) {
@@ -99,6 +99,7 @@ editButton.addEventListener("click", () => {
 });
 
 addButton.addEventListener("click", () => {
+  addFormValidator.toggleButtonState();
   openPopup(cardPopup);
 });
 
