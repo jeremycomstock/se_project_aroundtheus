@@ -11,20 +11,17 @@
     />
     <title>Around the US</title>
     <link rel="icon" href="favicon.ico" />
-    <link rel="stylesheet" href="pages/index.css" />
   </head>
   <body>
     <div class="page">
       <header class="header">
-        <img class="header__logo" src="images/logo-light.svg" alt="Logo" />
+        <img class="header__logo" src="<%=require("./images/logo-light.svg")%>"
+        alt="Logo" />
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            class="profile__avatar"
-            src="./images/jacques-cousteau.jpg"
-            alt="Avatar"
-          />
+          <img class="profile__avatar"
+          src="<%=require("./images/jacques-cousteau.jpg")%>" alt="Avatar" />
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <button
@@ -58,7 +55,7 @@
     </div>
 
     <!-- MODAL ELEMENTS -->
-    <div class="modal modal_type_edit">
+    <div class="modal modal_type_edit" id="edit-popup">
       <div class="modal__container">
         <button class="modal__close modal__close_type_edit"></button>
         <h2 class="modal__heading">Edit profile</h2>
@@ -95,7 +92,7 @@
         </form>
       </div>
     </div>
-    <div class="modal modal_type_add">
+    <div class="modal modal_type_add" id="new-card-popup">
       <div class="modal__container">
         <button class="modal__close modal__close_type_add"></button>
         <h2 class="modal__heading">New place</h2>
@@ -136,7 +133,7 @@
         </form>
       </div>
     </div>
-    <div class="modal modal_image">
+    <div class="modal modal_image" id="preview-image-popup">
       <div class="modal__preview">
         <button class="modal__close modal__close_type_preview"></button>
         <img class="modal__preview-image" src="#" alt="#" />
@@ -144,6 +141,5 @@
       </div>
     </div>
     <!-- SCRIPTS -->
-    <script src="./pages/index.js" type="module"></script>
   </body>
 </html>
