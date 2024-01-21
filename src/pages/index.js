@@ -41,7 +41,7 @@ function handleImageClick(cardData) {
 
 function renderCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
-  cardList.prepend(card.getView());
+  return card.getView();
 }
 
 // ! ||--------------------------------------------------------------------------------||
@@ -78,7 +78,6 @@ function handleAddCard({ title: name, link: link }) {
 // ! ||--------------------------------------------------------------------------------||
 
 const constants = new Constants();
-console.log(constants.initialCards);
 const editFormValidator = new FormValidator(
   constants.validationSettings,
   profileForm
@@ -106,7 +105,7 @@ addFormValidator.enableValidation();
 
 const cardGallery = new Section(
   { items: constants.initialCards, renderer: renderCard },
-  cardList
+  ".gallery__cards"
 );
 
 cardGallery.renderItems();
