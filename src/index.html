@@ -20,15 +20,18 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img class="profile__avatar"
-          src="<%=require("./images/jacques-cousteau.jpg")%>" alt="Avatar" />
+          <div class="profile__avatar-container">
+            <div class="profile__avatar-overlay"></div>
+            <img class="profile__avatar" alt="Avatar" />
+          </div>
+
           <div class="profile__info">
-            <h1 class="profile__name" id="name">Jacques Cousteau</h1>
+            <h1 class="profile__name" id="name"></h1>
             <button
               class="profile__button profile__edit-button"
               type="button"
             ></button>
-            <p class="profile__description" id="description">Explorer</p>
+            <p class="profile__description" id="description"></p>
           </div>
           <button
             class="profile__button profile__add-button"
@@ -55,6 +58,7 @@
     </div>
 
     <!-- MODAL ELEMENTS -->
+    <!-- Profile Modal -->
     <div class="modal modal_type_edit" id="edit-popup">
       <div class="modal__container">
         <button class="modal__close modal__close_type_edit"></button>
@@ -92,6 +96,33 @@
         </form>
       </div>
     </div>
+    <!-- Change Avatar Modal -->
+    <div class="modal modal_type_avatar" id="avatar-popup">
+      <div class="modal__container modal__container_type_avatar">
+        <button class="modal__close modal__close_type_avatar"></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form" name="avatar-form" novalidate>
+          <fieldset class="modal__fieldset">
+            <label class="modal__label">
+              <input
+                type="url"
+                class="modal__input modal__input_type_link"
+                placeholder="Image link"
+                name="avatar"
+                id="avatar-link"
+                minlength="2"
+                maxlength="200"
+                required />
+              <span class="modal__error" id="avatar-link-error"></span
+            ></label>
+          </fieldset>
+          <fieldset class="modal__fieldset">
+            <button type="submit" class="modal__button">Save</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <!-- New Card Modal -->
     <div class="modal modal_type_add" id="new-card-popup">
       <div class="modal__container">
         <button class="modal__close modal__close_type_add"></button>
@@ -133,11 +164,29 @@
         </form>
       </div>
     </div>
+    <!-- Image Modal -->
     <div class="modal modal_image" id="preview-image-popup">
       <div class="modal__preview">
         <button class="modal__close modal__close_type_preview"></button>
         <img class="modal__preview-image" src="#" alt="#" />
         <p class="modal__preview-name"></p>
+      </div>
+    </div>
+    <!-- Delete Confirmation Modal -->
+    <div class="modal modal_type_delete" id="delete-popup">
+      <div class="modal__container modal__container_type_delete">
+        <button class="modal__close modal__close_type_delete"></button>
+        <h2 class="modal__heading modal__heading_type_delete">Are you sure?</h2>
+        <form class="modal__form" name="delete-form" novalidate>
+          <fieldset class="modal__fieldset modal__fieldset_type_delete">
+            <button
+              type="submit"
+              class="modal__button modal__button_type_delete"
+            >
+              Yes
+            </button>
+          </fieldset>
+        </form>
       </div>
     </div>
     <!-- SCRIPTS -->

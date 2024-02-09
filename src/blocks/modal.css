@@ -44,6 +44,14 @@
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
 }
 
+.modal__container_type_delete {
+  height: 181px;
+}
+
+.modal__container_type_avatar {
+  height: 272px;
+}
+
 .modal__preview {
   position: relative;
   box-sizing: border-box;
@@ -80,6 +88,10 @@
   font-family: "Inter", "Arial", sans-serif;
   font-size: 24px;
   font-weight: 900;
+}
+
+.modal__heading_type_delete {
+  margin: 0;
 }
 
 .modal__form {
@@ -181,6 +193,10 @@
 .modal__button_disabled:hover {
   opacity: 0.2;
   cursor: default;
+}
+
+.modal__button_type_delete {
+  margin: 38px 0 0;
 }
 
 .modal_image {
