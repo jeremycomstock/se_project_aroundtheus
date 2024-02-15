@@ -2,10 +2,10 @@ export default class Card {
   constructor(
     {
       cardData,
+
       handleImageClick,
-      handleDeleteButton,
+      handleTrashClick,
       handleCardLike,
-      handleCardUnlike,
     },
     cardSelector
   ) {
@@ -15,9 +15,8 @@ export default class Card {
     this._id = cardData._id;
 
     this._handleImageClick = handleImageClick;
-    this._handleDeleteButton = handleDeleteButton;
-    this._handleCardLike = handleCardLike;
-    this._handleCardUnlike = handleCardUnlike;
+    this._handleTrashClick = handleTrashClick;
+    this._handleLikeClick = handleCardLike;
   }
 
   _getTemplate() {
@@ -32,21 +31,31 @@ export default class Card {
     this._element.remove();
   }
 
-  _handleLikeButton = () => {
-    if (!this._likeButton.classList.contains("card__like-button_active")) {
-      this._handleCardLike(this._id);
+  isLiked() {
+    return this._isLiked;
+  }
+
+  setIsLiked(isLiked) {
+    console.log(isLiked, "hello from setisliked");
+    this._isLiked = isLiked;
+    this._renderLikes();
+  }
+
+  _renderLikes() {
+    if (this.isLiked()) {
       this._likeButton.classList.add("card__like-button_active");
-    } else if (
-      this._likeButton.classList.contains("card__like-button_active")
-    ) {
-      this._handleCardUnlike(this._id);
+    } else {
       this._likeButton.classList.remove("card__like-button_active");
     }
-  };
+  }
 
   _setEventListeners() {
-    this._likeButton.addEventListener("click", this._handleLikeButton);
-    this._deleteButton.addEventListener("click", this._handleDeleteButton);
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeClick(this);
+    });
+    this._deleteButton.addEventListener("click", () => {
+      this._handleTrashClick(this);
+    });
     this._cardImage.addEventListener("click", () => {
       this._handleImageClick({
         name: this._name,
@@ -68,6 +77,7 @@ export default class Card {
     this._cardNameContent.textContent = this._name;
 
     this._setEventListeners();
+    this._renderLikes();
     return this._element;
   }
 }

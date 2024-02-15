@@ -7,7 +7,7 @@ import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-import PopupDelete from "../components/PopupDelete.js";
+import PopupConfirmation from "../components/PopupConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
 import "./index.css";
 import Constants from "../utils/constants.js";
@@ -25,31 +25,32 @@ const api = new Api({
   },
 });
 
-api.getUserInfo().then((userData) => {
-  profileInfo.setUserInfo({
-    name: userData.name,
-    description: userData.about,
-  });
-});
-
-api.getUserInfo().then((userData) => {
-  avatar.setAttribute("src", userData.avatar);
-});
-
-function handleUpdateProfile(userData) {
-  api.updateProfile(userData).then((userData) => {
+api
+  .getUserInfo()
+  .then((userData) => {
     profileInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
     });
-  });
+    profileInfo.updateAvatar(userData.avatar);
+  })
+  .catch(api.processError);
+
+function handleUpdateProfile(userData) {
+  api
+    .updateProfile(userData)
+    .then((userData) => {
+      profileInfo.setUserInfo({
+        name: userData.name,
+        description: userData.about,
+      });
+    })
+    .catch(api.processError);
 }
 
 function handleUpdateAvatar(userData) {
   api.updateAvatar(userData);
-  api.getUserInfo().then((userdata) => {
-    avatar.setAttribute("src", userData.avatar);
-  });
+  profileInfo.updateAvatar(userData.avatar);
 }
 
 // ! ||--------------------------------------------------------------------------------||
@@ -88,6 +89,38 @@ function handleImageClick(cardData) {
   imagePopup.open(cardData);
 }
 
+const handleTrashClick = (card) => {
+  confirmDeletePopup.open();
+  confirmDeletePopup.setConfirmAction(() => {
+    const id = card.getId();
+    confirmDeletePopup.renderLoading();
+    api
+      .removeCard(id)
+      .then(() => {
+        confirmDeletePopup.close();
+        card.removeItem();
+      })
+      .catch(api.processError)
+      .finally(() => {
+        confirmDeletePopup.endLoading();
+      });
+  });
+};
+
+const handleCardLike = (card) => {
+  if (card.isLiked()) {
+    api
+      .dislikeCard(card._id)
+      .then((res) => card.setIsLiked(res.isLiked))
+      .catch(api.processError);
+  } else {
+    api
+      .likeCard(card._id)
+      .then((res) => card.setIsLiked(res.isLiked))
+      .catch(api.processError);
+  }
+};
+
 // ! ||--------------------------------------------------------------------------------||
 // ! ||                                 Event Listeners                                ||
 // ! ||--------------------------------------------------------------------------------||
@@ -100,7 +133,6 @@ editButton.addEventListener("click", () => {
 });
 
 avatarOverlay.addEventListener("click", () => {
-  console.log("Hello from avatar click");
   updateAvatarPopup.open();
 });
 
@@ -127,6 +159,7 @@ const avatarFormValidator = new FormValidator(
 const profileInfo = new UserInfo({
   name: ".profile__name",
   description: ".profile__description",
+  avatar: ".profile__avatar",
 });
 
 const editProfilePopup = new PopupWithForm("#edit-popup", handleUpdateProfile);
@@ -135,6 +168,8 @@ const updateAvatarPopup = new PopupWithForm(
   "#avatar-popup",
   handleUpdateAvatar
 );
+
+const confirmDeletePopup = new PopupConfirmation("#delete-popup");
 
 const imagePopup = new PopupWithImage("#preview-image-popup");
 
@@ -146,65 +181,51 @@ avatarFormValidator.enableValidation();
 // ! ||                                Gallery Creation                                ||
 // ! ||--------------------------------------------------------------------------------||
 
-api.getInitialCards().then((cards) => {
-  const cardGallery = new Section(
-    { items: cards, renderer: renderCard },
-    ".gallery__cards"
+let cardGallery;
+
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardGallery = new Section(
+      { items: cards, renderer: renderCard },
+      ".gallery__cards"
+    );
+    cardGallery.renderItems();
+  })
+  .catch(api.processError);
+
+function renderCard(cardData) {
+  const card = new Card(
+    {
+      cardData,
+
+      handleImageClick,
+      handleTrashClick,
+      handleCardLike,
+    },
+    cardTemplate
   );
 
-  function renderCard(cardData) {
-    const card = new Card(
-      {
-        cardData,
+  return card.getView();
+}
 
-        handleImageClick,
-        handleDeleteButton,
-        handleCardLike,
-        handleCardUnlike,
-      },
-      cardTemplate
-    );
-
-    function handleDeleteButton() {
-      console.log(document.querySelector(`.modal_type_delete`));
-      deletePopup.open();
-    }
-
-    function handleCardLike(id) {
-      api.likeCard(id);
-    }
-
-    function handleCardUnlike(id) {
-      api.unlikeCard(id);
-    }
-
-    const handleDeleteSubmit = () => {
-      let id = card.getId();
-      api.removeCard(id);
-      card.removeItem();
-      // For some reason, when this function is called consecutively,
-      // it saves the card's ID from each previous time it was called,
-      // so it tries to delete those IDs as well.
-    };
-
-    const deletePopup = new PopupDelete("#delete-popup", handleDeleteSubmit);
-
-    return card.getView();
-  }
-
-  function handleAddCard({ title: name, link: link }) {
-    api.addCard({ name, link }).then((data) => {
+function handleAddCard({ title: name, link: link }) {
+  newCardPopup.renderLoading();
+  api
+    .addCard({ name, link })
+    .then((data) => {
+      newCardPopup.close();
       cardGallery.addItem(data);
+    })
+    .catch(api.processError)
+    .finally(() => {
+      newCardPopup.endLoading();
     });
-    newCardPopup.close();
-  }
+}
 
-  const newCardPopup = new PopupWithForm("#new-card-popup", handleAddCard);
+const newCardPopup = new PopupWithForm("#new-card-popup", handleAddCard);
 
-  addButton.addEventListener("click", () => {
-    addFormValidator.toggleButtonState();
-    newCardPopup.open();
-  });
-
-  cardGallery.renderItems();
+addButton.addEventListener("click", () => {
+  addFormValidator.toggleButtonState();
+  newCardPopup.open();
 });
