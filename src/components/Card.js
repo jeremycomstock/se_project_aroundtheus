@@ -36,7 +36,6 @@ export default class Card {
   }
 
   setIsLiked(isLiked) {
-    console.log(isLiked, "hello from setisliked");
     this._isLiked = isLiked;
     this._renderLikes();
   }

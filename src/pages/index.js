@@ -37,6 +37,7 @@ api
   .catch(api.processError);
 
 function handleUpdateProfile(userData) {
+  editProfilePopup.renderLoading();
   api
     .updateProfile(userData)
     .then((userData) => {
@@ -45,12 +46,21 @@ function handleUpdateProfile(userData) {
         description: userData.about,
       });
     })
-    .catch(api.processError);
+    .catch(api.processError)
+    .finally(() => {
+      editProfilePopup.endLoading();
+    });
 }
 
 function handleUpdateAvatar(userData) {
-  api.updateAvatar(userData);
-  profileInfo.updateAvatar(userData.avatar);
+  updateAvatarPopup.renderLoading();
+  api
+    .updateAvatar(userData)
+    .then(profileInfo.updateAvatar(userData.avatar))
+    .catch(api.processError)
+    .finally(() => {
+      updateAvatarPopup.endLoading();
+    });
 }
 
 // ! ||--------------------------------------------------------------------------------||
@@ -133,6 +143,7 @@ editButton.addEventListener("click", () => {
 });
 
 avatarOverlay.addEventListener("click", () => {
+  avatarFormValidator.toggleButtonState();
   updateAvatarPopup.open();
 });
 
