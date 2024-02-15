@@ -45,6 +45,7 @@ function handleUpdateProfile(userData) {
         name: userData.name,
         description: userData.about,
       });
+      editProfilePopup.close();
     })
     .catch(api.processError)
     .finally(() => {
@@ -56,7 +57,10 @@ function handleUpdateAvatar(userData) {
   updateAvatarPopup.renderLoading();
   api
     .updateAvatar(userData)
-    .then(profileInfo.updateAvatar(userData.avatar))
+    .then((userdata) => {
+      profileInfo.updateAvatar(userData.avatar);
+      updateAvatarPopup.close();
+    })
     .catch(api.processError)
     .finally(() => {
       updateAvatarPopup.endLoading();
